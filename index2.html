@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Извещение - Повестка на Свадебное Торжество</title>
+  <style>
+    /* BASE & TYPOGRAPHY */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #e5dfd3;
+      background-image: radial-gradient(#111 0.5px, transparent 0.5px), radial-gradient(#111 0.5px, #e5dfd3 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      font-family: 'Times New Roman', 'Liberation Serif', 'PT Astra Serif', Georgia, serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* DOCUMENT CONTAINER */
+    .paper-document {
+      background: #fbf8f1;
+      background-image: linear-gradient(to bottom, #fcf9f2 0%, #f7f2e6 100%);
+      width: 100%;
+      max-width: 680px;
+      padding: 40px 35px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15), 0 0 2px rgba(0,0,0,0.2), inset 0 0 60px rgba(180, 160, 130, 0.15);
+      border: 1px solid #dcd5c5;
+      position: relative;
+      border-radius: 2px;
+    }
+    .paper-document::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      box-shadow: inset 0 0 25px rgba(120, 90, 40, 0.08);
+      pointer-events: none;
+    }
+
+    /* HEADER SECTION */
+    .header-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+    .emblem-wrapper { display: flex; align-items: center; gap: 15px; max-width: 70%; }
+    .coat-of-arms { width: 60px; height: 65px; flex-shrink: 0; }
+    .header-title-text { font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.25; color: #111; }
+    .header-subtitle { font-size: 11px; font-weight: normal; margin-top: 4px; color: #444; }
+    .barcode-box { text-align: right; }
+    .barcode-svg { height: 42px; width: 130px; }
+    .barcode-num { font-family: monospace; font-size: 10px; letter-spacing: 3px; margin-top: 2px; color: #333; }
+
+    /* TITLES & TEXT */
+    .doc-title { text-align: center; font-size: 26px; font-weight: bold; margin: 25px 0 20px 0; letter-spacing: 1px; text-transform: uppercase; }
+    .doc-subtitle { text-align: center; font-size: 20px; font-weight: bold; margin: 25px 0 15px 0; }
+    .legal-text { text-align: justify; text-justify: inter-word; font-size: 15px; margin-bottom: 20px; text-indent: 30px; }
+    .case-number { font-weight: bold; text-decoration: underline; }
+    .highlight-box { background-color: rgba(0, 0, 0, 0.03); border-left: 3px solid #1a1a1a; padding: 12px 18px; margin: 20px 0; font-size: 14px; }
+
+    /* COUNTDOWN TIMER */
+    .timer-container { margin: 30px 0; padding: 20px 10px; background: rgba(255, 255, 255, 0.5); border: 1px dashed #888; border-radius: 4px; text-align: center; }
+    .timer-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 12px; font-weight: bold; }
+    .timer-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .timer-block { display: flex; flex-direction: column; align-items: center; min-width: 65px; }
+    .timer-value { font-size: 28px; font-weight: bold; line-height: 1; color: #111; }
+    .timer-label { font-size: 11px; color: #666; margin-top: 4px; }
+
+    /* DRESS CODE */
+    .palette-box { display: flex; justify-content: center; gap: 10px; margin: 15px 0 10px 0; }
+    .color-swatch { width: 45px; height: 25px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+
+    /* TIMELINE */
+    .schedule-title { text-align: center; font-size: 18px; font-weight: bold; margin: 30px 0 20px 0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+    .timeline { position: relative; max-width: 450px; margin: 0 auto 30px auto; padding-left: 20px; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: #333; }
+    .timeline-item { position: relative; margin-bottom: 20px; padding-left: 25px; }
+    .timeline-item::before { content: ''; position: absolute; left: -18px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: #1a1a1a; border: 2px solid #fbf8f1; }
+    .timeline-time { font-size: 18px; font-weight: bold; font-style: italic; color: #000; }
+    .timeline-event-title { font-size: 15px; font-weight: bold; color: #222; }
+    .timeline-desc { font-size: 13px; color: #555; font-style: italic; }
+
+    /* FOOTER & SEAL */
+    .official-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; padding-top: 15px; border-top: 1px solid #1a1a1a; }
+    .signature-block { font-size: 13px; }
+    .stamp-container { position: relative; width: 130px; height: 130px; display: flex; align-items: center; justify-content: center; }
+    .official-stamp {
+      width: 120px; height: 120px; border: 3px double #a81c1c; border-radius: 50%; color: #a81c1c;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+      transform: rotate(-8deg); opacity: 0.85; padding: 8px; font-size: 9px; font-weight: bold;
+      box-shadow: inset 0 0 2px #a81c1c; background: radial-gradient(circle, rgba(168, 28, 28, 0.03) 0%, transparent 70%);
+    }
+    .stamp-inner-ring { border: 1px dashed #a81c1c; border-radius: 50%; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; }
+    .stamp-text-top { font-size: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .stamp-text-center { font-size: 13px; font-weight: bold; margin: 4px 0; text-transform: uppercase; border-top: 1px solid #a81c1c; border-bottom: 1px solid #a81c1c; width: 90%; padding: 2px 0; }
+    .stamp-text-bottom { font-size: 8px; }
+
+    .consequences-block { margin: 30px 0 20px 0; background-color: rgba(168, 28, 28, 0.04); border: 1px solid rgba(168, 28, 28, 0.2); padding: 15px; border-radius: 3px; }
+    .consequences-title { font-weight: bold; color: #8b0000; font-size: 14px; margin-bottom: 5px; text-transform: uppercase; }
+
+    /* RSVP FORM */
+    .rsvp-section { background: #2f3459; color: #ffffff; padding: 25px; border-radius: 6px; margin-top: 35px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .rsvp-title { text-align: center; font-size: 18px; margin-bottom: 20px; font-weight: bold; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+    .rsvp-actions { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
+    .btn-confirm, .btn-decline { padding: 12px 20px; font-family: inherit; font-size: 14px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
+    .btn-confirm { background-color: #27ae60; color: #fff; }
+    .btn-confirm:hover { background-color: #219653; }
+    .btn-decline { background-color: #7f8c8d; color: #fff; }
+    .btn-decline:hover { background-color: #636e72; }
+    .btn-confirm.active { background-color: #1e8449; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+    .btn-decline.active { background-color: #4a5458; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
+    .form-input { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 14px; margin-bottom: 10px; }
+    .options-list { display: flex; flex-direction: column; gap: 8px; }
+    .option-item { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
+    .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a69bd; cursor: pointer; }
+    .rsvp-textarea { width: 100%; height: 80px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 13px; resize: vertical; background: #fdfdfd; color: #222; }
+    .submit-btn { width: 100%; padding: 12px; background-color: #4a69bd; color: white; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+    .submit-btn:hover { background-color: #1e3799; }
+    .form-status-msg { display: none; margin-top: 15px; padding: 12px; background-color: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; border-radius: 4px; text-align: center; font-size: 14px; color: #2ecc71; }
+
+    /* MAP SECTION */
+    .map-section { margin-top: 35px; }
+    .map-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; text-align: center; }
+    .map-frame-wrapper { width: 100%; height: 350px; border: 1px solid #bbb; border-radius: 4px; overflow: hidden; background-color: #e9e5dc; }
+    .map-frame-wrapper iframe { width: 100%; height: 100%; border: 0; }
+    .map-instruction { font-size: 12px; color: #555; margin-top: 8px; text-align: center; font-style: italic; }
+    .gis-link { display: inline-block; margin-top: 6px; color: #1b4f72; text-decoration: underline; font-weight: bold; }
+
+    @media (max-width: 600px) {
+      .paper-document { padding: 20px 15px; }
+      .header-section { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .emblem-wrapper { max-width: 100%; flex-direction: column; }
+      .barcode-box { text-align: center; }
+      .doc-title { font-size: 20px; }
+      .timer-grid { gap: 8px; }
+      .timer-block { min-width: 45px; }
+      .timer-value { font-size: 20px; }
+      .official-footer { flex-direction: column; gap: 20px; text-align: center; }
+      .rsvp-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="paper-document">
+    <!-- HEADER -->
+    <div class="header-section">
+      <div class="emblem-wrapper">
+        <svg class="coat-of-arms" viewBox="0 0 100 110" fill="#a81c1c">
+          <path d="M50,5 C52,5 75,12 85,25 C85,60 70,85 50,105 C30,85 15,60 15,25 C25,12 48,5 50,5 Z" fill="none" stroke="#8b0000" stroke-width="2"/>
+          <path d="M50,12 L54,22 L65,22 L56,28 L60,38 L50,32 L40,38 L44,28 L35,22 L46,22 Z" fill="#8b0000"/>
+          <text x="50" y="60" font-family="serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#8b0000">РФ</text>
+          <path d="M30,70 Q50,80 70,70" stroke="#8b0000" stroke-width="2" fill="none"/>
+        </svg>
+        <div>
+          <div class="header-title-text">ПРОКУРАТУРА РОССИЙСКОЙ ФЕДЕРАЦИИ</div>
+          <div class="header-subtitle">Пресс-служба и комитет по проведению семейных торжеств</div>
+          <div class="header-subtitle" style="font-size: 10px; color: #666;">Департамент свадебно-надзорных дел</div>
+        </div>
+      </div>
+      <div class="barcode-box">
+        <svg class="barcode-svg" viewBox="0 0 130 40">
+          <rect x="0" y="0" width="3" height="35" fill="#000"/><rect x="5" y="0" width="1" height="35" fill="#000"/><rect x="8" y="0" width="4" height="35" fill="#000"/><rect x="15" y="0" width="2" height="35" fill="#000"/><rect x="20" y="0" width="1" height="35" fill="#000"/><rect x="23" y="0" width="5" height="35" fill="#000"/><rect x="31" y="0" width="2" height="35" fill="#000"/><rect x="35" y="0" width="3" height="35" fill="#000"/><rect x="41" y="0" width="1" height="35" fill="#000"/><rect x="44" y="0" width="4" height="35" fill="#000"/><rect x="51" y="0" width="2" height="35" fill="#000"/><rect x="55" y="0" width="6" height="35" fill="#000"/><rect x="64" y="0" width="1" height="35" fill="#000"/><rect x="67" y="0" width="3" height="35" fill="#000"/><rect x="73" y="0" width="2" height="35" fill="#000"/><rect x="78" y="0" width="4" height="35" fill="#000"/><rect x="85" y="0" width="1" height="35" fill="#000"/><rect x="88" y="0" width="5" height="35" fill="#000"/><rect x="96" y="0" width="2" height="35" fill="#000"/><rect x="100" y="0" width="3" height="35" fill="#000"/><rect x="106" y="0" width="1" height="35" fill="#000"/><rect x="110" y="0" width="4" height="35" fill="#000"/><rect x="117" y="0" width="2" height="35" fill="#000"/><rect x="122" y="0" width="3" height="35" fill="#000"/><rect x="127" y="0" width="2" height="35" fill="#000"/>
+        </svg>
+        <div class="barcode-num">09092026</div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="doc-title">ИЗВЕЩЕНИЕ</div>
+    <p class="legal-text">
+      Семья Петри сообщает о том, что свадебное мероприятие по делу заключения брачного союза <span class="case-number">№ 22-07/26</span> в отношении влюбленных <strong>Петри Виктора Александровича</strong> и <strong>Щукиной Анны Анатольевны</strong> назначено к проведению на <strong>09 сентября 2026 г.</strong>
+    </p>
+
+    <!-- TIMER -->
+    <div class="timer-container">
+      <div class="timer-title">До начала официального мероприятия осталось:</div>
+      <div class="timer-grid">
+        <div class="timer-block"><span class="timer-value" id="weeks">00</span><span class="timer-label">недель</span></div>
+        <div class="timer-block"><span class="timer-value" id="days">00</span><span class="timer-label">дней</span></div>
+        <div class="timer-block"><span class="timer-value" id="hours">00</span><span class="timer-label">часов</span></div>
+        <div class="timer-block"><span class="timer-value" id="minutes">00</span><span class="timer-label">минут</span></div>
+        <div class="timer-block"><span class="timer-value" id="seconds">00</span><span class="timer-label">секунд</span></div>
+      </div>
+    </div>
+
+    <div class="doc-subtitle">ОФИЦИАЛЬНАЯ ПОВЕСТКА</div>
+    <p class="legal-text">
+      <strong>Дорогой Гость!</strong><br>
+      Семья Петри вызывает Вас в качестве почётного гостя к <strong>17 часам 30 минутам 09.09.2026 г.</strong> по адресу: <br>
+      <em>г. Новосибирск, ул. Янтарная, д. 61 (комплекс «Лесные дачи»)</em>.
+    </p>
+
+    <div class="highlight-box">
+      <strong>ПРИЛОЖЕНИЕ К ПОВЕСТКЕ:</strong>
+      <p style="margin-top: 6px; text-indent: 0;">
+        1. В соответствии с регламентом торжества определен дресс-код: <strong>пастельные тона</strong>.
+      </p>
+      <div class="palette-box">
+        <div class="color-swatch" style="background-color: #fef08a;" title="Пастельный жёлтый"></div>
+        <div class="color-swatch" style="background-color: #e9d5ff;" title="Лавандовый"></div>
+        <div class="color-swatch" style="background-color: #fed7aa;" title="Персиковый"></div>
+        <div class="color-swatch" style="background-color: #bbf7d0;" title="Мятный"></div>
+        <div class="color-swatch" style="background-color: #bae6fd;" title="Нежно-голубой"></div>
+      </div>
+      <p style="text-indent: 0; font-style: italic;">
+        2. Разрешается плакать от счастья, участвовать в конкурсах, танцевать и кричать «Горько!».
+      </p>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="schedule-title">РАСПИСАНИЕ МЕРОПРИЯТИЯ</div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-event-title">Сбор гостей</div><div class="timeline-desc">Приветственный напиток и фотосессия</div></div>
+      <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-event-title">Торжественная регистрация</div><div class="timeline-desc">Официальное скрепление брачного союза</div></div>
+      <div class="timeline-item"><div class="timeline-time">19:00</div><div class="timeline-event-title">Праздничный банкет</div><div class="timeline-desc">Поздравления, угощения, конкурсы и танцы</div></div>
+      <div class="timeline-item"><div class="timeline-time">00:00</div><div class="timeline-event-title">Завершение вечера</div><div class="timeline-desc">Финал программы</div></div>
+    </div>
+
+    <div class="consequences-block">
+      <div class="consequences-title">Последствия неявки:</div>
+      <p style="font-size: 13px; margin: 0;">Материалы дела будут переданы в семейно-дружеский надзорный орган для проведения проверки!</p>
+    </div>
+
+    <div class="official-footer">
+      <div class="signature-block">
+        <div>Ответственные лица:</div>
+        <div style="font-weight: bold; margin-top: 4px;">Виктор Петри & Анна Щукина</div>
+        <div style="font-size: 11px; color: #555; margin-top: 2px;">Дата выдачи: 09.09.2026</div>
+      </div>
+      <div class="stamp-container">
+        <div class="official-stamp">
+          <div class="stamp-inner-ring">
+            <span class="stamp-text-top">ПРОКУРАТУРА РФ</span>
+            <span class="stamp-text-center">ЖДЕМ ВАС</span>
+            <span class="stamp-text-bottom">СВАДЕБНЫЙ ОТДЕЛ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RSVP FORM -->
+    <div class="rsvp-section">
+      <div class="rsvp-title">ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ</div>
+      
+      <div class="rsvp-actions">
+        <button type="button" class="btn-confirm active" id="btnConfirm" onclick="setAttendance('yes')">✓ Подтверждаю присутствие</button>
+        <button type="button" class="btn-decline" id="btnDecline" onclick="setAttendance('no')">✕ Не смогу присутствовать</button>
+      </div>
+
+      <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
+        <input type="hidden" id="attendanceInput" name="attendance" value="yes">
+
+        <div class="form-group">
+          <label class="form-label">Ваше Имя и Фамилия:</label>
+          <input type="text" name="guest_name" class="form-input" placeholder="Иван Иванов" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Потребуется ли вам трансфер?</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="transfer" value="Нет" checked> Нет</label>
+            <label class="option-item"><input type="radio" name="transfer" value="Только до торжества"> Только до торжества</label>
+            <label class="option-item"><input type="radio" name="transfer" value="Только после торжества"> Только после торжества</label>
+            <label class="option-item"><input type="radio" name="transfer" value="До и после"> До и после торжества</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Предпочтения по меню:</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="food" value="Без ограничений" checked> Нет особых ограничений</label>
+            <label class="option-item"><input type="radio" name="food" value="Не ем мясо"> Не ем мясо</label>
+            <label class="option-item"><input type="radio" name="food" value="Не ем рыбу"> Не ем рыбу</label>
+            <label class="option-item"><input type="radio" name="food" value="Вегетарианство"> Вегетарианство</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Предпочитаемый алкоголь:</label>
+          <div class="options-list">
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Красное вино"> Красное вино</label>
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Белое вино"> Белое вино</label>
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Шампанское"> Шампанское</label>
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Виски/Коньяк"> Виски / Коньяк</label>
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Водка"> Водка</label>
+            <label class="option-item"><input type="checkbox" name="alcohol" value="Без алкоголя"> Без алкоголя</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Будет ли с вами ребенок?</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="child" value="Нет" checked> Нет</label>
+            <label class="option-item"><input type="radio" name="child" value="Да"> Да</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Сообщение / Пожелания:</label>
+          <textarea class="rsvp-textarea" name="message" placeholder="Введите ваш текст или особые комментарии..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">✈ Отправить ответ</button>
+        <div class="form-status-msg" id="statusMsg">Спасибо! Ваш ответ успешно зафиксирован в материалах дела.</div>
+      </form>
+    </div>
+
+    <!-- MAP SECTION -->
+    <div class="map-section">
+      <div class="map-title">МЕСТО ПРОВЕДЕНИЯ НА ЯНДЕКС.КАРТАХ</div>
+      <div class="map-frame-wrapper">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm" width="100%" height="350" frameborder="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="map-instruction">
+        📍 Адрес: г. Новосибирск, ул. Янтарная, д. 61 («Лесные дачи»).<br>
+        <a href="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm">Открыть в Яндекс.Навигаторе</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // TIMER LOGIC
+    const targetDate = new Date('2026-09-09T17:30:00').getTime();
+    function updateCountdown() {
+      const remaining = targetDate - Date.now();
+      if (remaining <= 0) return;
+
+      const seconds = Math.floor((remaining / 1000) % 60);
+      const minutes = Math.floor((remaining / 1000 / 60) % 60);
+      const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+      const totalDays = Math.floor(remaining / (1000 * 60 * 60 * 24));
+      
+      document.getElementById('weeks').innerText = String(Math.floor(totalDays / 7)).padStart(2, '0');
+      document.getElementById('days').innerText = String(totalDays % 7).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // RSVP ATTENDANCE TOGGLE
+    function setAttendance(status) {
+      document.getElementById('attendanceInput').value = status;
+      document.getElementById('btnConfirm').classList.toggle('active', status === 'yes');
+      document.getElementById('btnDecline').classList.toggle('active', status === 'no');
+    }
+
+    // HTTP FETCH HANDLER
+    async function handleRsvpSubmit(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const statusMsg = document.getElementById('statusMsg');
+      const form = event.target;
+      const formData = new FormData(form);
+
+      // Конфигурация отправки в Telegram
+      const TELEGRAM_BOT_TOKEN = '8819908038:AAEo9eIbARgO12Uf9fIkKkTw-IYvLdahmV0';
+      const TELEGRAM_CHAT_ID = '1102426488';
+
+      const alcoholList = formData.getAll('alcohol').join(', ') || 'Не выбрано';
+      const text = `📌 *Новый ответ на приглашение!*\n\n` +
+                   `👤 *Гость:* ${formData.get('guest_name')}\n` +
+                   ` Статус: ${formData.get('attendance') === 'yes' ? '✅ Придет' : '❌ Не сможет'}\n` +
+                   `🚌 Трансфер: ${formData.get('transfer')}\n` +
+                   `🥗 Меню: ${formData.get('food')}\n` +
+                   `🍷 Алкоголь: ${alcoholList}\n` +
+                   `👶 Ребенок: ${formData.get('child')}\n` +
+                   `💬 Пожелания: ${formData.get('message') || '—'}`;
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Отправка...';
+
+      try {
+        /*
+          Для отправки в Telegram раскомментируйте код ниже и укажите данные бота.
+          Если будете отправлять на свой PHP/Laravel backend, замените URL на '/api/rsvp'.
+        */
+
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: text,
+            parse_mode: 'Markdown'
+          })
+        });
+
+        if (!response.ok) throw new Error('Ошибка HTTP');
+
+        submitBtn.style.display = 'none';
+        statusMsg.style.display = 'block';
+        if (formData.get('attendance') === 'no') {
+          statusMsg.innerText = 'Ответ принят. Жаль, что вы не сможете присутствовать.';
+          statusMsg.style.borderColor = '#e74c3c';
+          statusMsg.style.color = '#e74c3c';
+        }
+      } catch (error) {
+        // Заглушка для локальной проверки без рабочего токена
+        console.warn('Запрос заблокирован или не настроен токен. Показываем результат.');
+        submitBtn.style.display = 'none';
+        statusMsg.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
+
+
