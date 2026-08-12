@@ -364,7 +364,6 @@
         const form = event.target;
         const formData = new FormData(form);
 
-        // Вставь те сюда URL вашего развернутого Google Web App
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDL8VPlbQBhY8fv4MEuH9I3EQdvNwrTJP4mUagurtKkWCX8g-I6S3Bq3lJSW3fJdBN/exec';
 
         const payload = {
@@ -381,11 +380,12 @@
         submitBtn.innerText = 'Отправка...';
 
         try {
-            // Используем mode: 'no-cors' для корректной отправки payload на домен Google
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8' // Исключает OPTIONS-запрос и передает raw JSON body
+                },
                 body: JSON.stringify(payload)
             });
 
@@ -398,8 +398,8 @@
                 statusMsg.style.color = '#e74c3c';
             }
         } catch (error) {
-            console.error('Ошибка записи в Google Sheets:', error);
-            alert('Произошла ошибка при отправке ответа. Попробуйте еще раз.');
+            console.error('Network/Fetch error:', error);
+            alert('Ошибка сети при отправке формы.');
             submitBtn.disabled = false;
             submitBtn.innerText = '✈ Отправить ответ';
         }
