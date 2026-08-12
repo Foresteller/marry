@@ -1,359 +1,683 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Извещение  - Повестка на Свадебное Торжество</title>
-  <style>
-    /* BASE & TYPOGRAPHY */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: #e5dfd3;
-      background-image: radial-gradient(#111 0.5px, transparent 0.5px), radial-gradient(#111 0.5px, #e5dfd3 0.5px);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      font-family: 'Times New Roman', 'Liberation Serif', 'PT Astra Serif', Georgia, serif;
-      color: #1a1a1a;
-      line-height: 1.6;
-      padding: 20px 10px;
-      display: flex;
-      justify-content: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Извещение  - Повестка на Свадебное Торжество</title>
+    <style>
+        /* BASE & TYPOGRAPHY */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #e5dfd3;
+            background-image: radial-gradient(#111 0.5px, transparent 0.5px), radial-gradient(#111 0.5px, #e5dfd3 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            font-family: 'Times New Roman', 'Liberation Serif', 'PT Astra Serif', Georgia, serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-    /* DOCUMENT CONTAINER */
-    .paper-document {
-      background: #fbf8f1;
-      background-image: linear-gradient(to bottom, #fcf9f2 0%, #f7f2e6 100%);
-      width: 100%;
-      max-width: 680px;
-      padding: 40px 35px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15), 0 0 2px rgba(0,0,0,0.2), inset 0 0 60px rgba(180, 160, 130, 0.15);
-      border: 1px solid #dcd5c5;
-      position: relative;
-      border-radius: 2px;
-    }
-    .paper-document::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      box-shadow: inset 0 0 25px rgba(120, 90, 40, 0.08);
-      pointer-events: none;
-    }
+        /* DOCUMENT CONTAINER */
+        .paper-document {
+            background: #fbf8f1;
+            background-image: linear-gradient(to bottom, #fcf9f2 0%, #f7f2e6 100%);
+            width: 100%;
+            max-width: 680px;
+            padding: 40px 35px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15), 0 0 2px rgba(0,0,0,0.2), inset 0 0 60px rgba(180, 160, 130, 0.15);
+            border: 1px solid #dcd5c5;
+            position: relative;
+            border-radius: 2px;
+        }
+        .paper-document::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 25px rgba(120, 90, 40, 0.08);
+            pointer-events: none;
+        }
 
-    /* HEADER SECTION */
-    .header-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      border-bottom: 2px solid #1a1a1a;
-      padding-bottom: 15px;
-      margin-bottom: 25px;
-    }
-    .emblem-wrapper { display: flex; align-items: center; gap: 15px; max-width: 70%; }
-    .coat-of-arms { width: 60px; height: 65px; flex-shrink: 0; }
-    .header-title-text { font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.25; color: #111; }
-    .header-subtitle { font-size: 11px; font-weight: normal; margin-top: 4px; color: #444; }
-    .barcode-box { text-align: right; }
-    .barcode-svg { height: 42px; width: 130px; }
-    .barcode-num { font-family: monospace; font-size: 10px; letter-spacing: 3px; margin-top: 2px; color: #333; }
+        /* HEADER SECTION */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .emblem-wrapper { display: flex; align-items: center; gap: 15px; max-width: 70%; }
+        .coat-of-arms { width: 60px; height: 65px; flex-shrink: 0; }
+        .header-title-text { font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.25; color: #111; }
+        .header-subtitle { font-size: 11px; font-weight: normal; margin-top: 4px; color: #444; }
+        .barcode-box { text-align: right; }
+        .barcode-svg { height: 42px; width: 130px; }
+        .barcode-num { font-family: monospace; font-size: 10px; letter-spacing: 3px; margin-top: 2px; color: #333; }
 
-    /* TITLES & TEXT */
-    .doc-title { text-align: center; font-size: 26px; font-weight: bold; margin: 25px 0 20px 0; letter-spacing: 1px; text-transform: uppercase; }
-    .doc-subtitle { text-align: center; font-size: 20px; font-weight: bold; margin: 25px 0 15px 0; }
-    .legal-text { text-align: justify; text-justify: inter-word; font-size: 15px; margin-bottom: 20px; text-indent: 30px; }
-    .case-number { font-weight: bold; text-decoration: underline; }
-    .highlight-box { background-color: rgba(0, 0, 0, 0.03); border-left: 3px solid #1a1a1a; padding: 12px 18px; margin: 20px 0; font-size: 14px; }
+        /* TITLES & TEXT */
+        .doc-title { text-align: center; font-size: 26px; font-weight: bold; margin: 25px 0 20px 0; letter-spacing: 1px; text-transform: uppercase; }
+        .doc-subtitle { text-align: center; font-size: 20px; font-weight: bold; margin: 25px 0 15px 0; }
+        .legal-text { text-align: justify; text-justify: inter-word; font-size: 15px; margin-bottom: 20px; text-indent: 30px; }
+        .case-number { font-weight: bold; text-decoration: underline; }
+        .highlight-box { background-color: rgba(0, 0, 0, 0.03); border-left: 3px solid #1a1a1a; padding: 12px 18px; margin: 20px 0; font-size: 14px; }
 
-    /* COUNTDOWN TIMER */
-    .timer-container { margin: 30px 0; padding: 20px 10px; background: rgba(255, 255, 255, 0.5); border: 1px dashed #888; border-radius: 4px; text-align: center; }
-    .timer-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 12px; font-weight: bold; }
-    .timer-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .timer-block { display: flex; flex-direction: column; align-items: center; min-width: 65px; }
-    .timer-value { font-size: 28px; font-weight: bold; line-height: 1; color: #111; }
-    .timer-label { font-size: 11px; color: #666; margin-top: 4px; }
+        /* COUNTDOWN TIMER */
+        .timer-container { margin: 30px 0; padding: 20px 10px; background: rgba(255, 255, 255, 0.5); border: 1px dashed #888; border-radius: 4px; text-align: center; }
+        .timer-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 12px; font-weight: bold; }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .timer-block { display: flex; flex-direction: column; align-items: center; min-width: 65px; }
+        .timer-value { font-size: 28px; font-weight: bold; line-height: 1; color: #111; }
+        .timer-label { font-size: 11px; color: #666; margin-top: 4px; }
 
-    /* DRESS CODE */
-    .palette-box { display: flex; justify-content: center; gap: 10px; margin: 15px 0 10px 0; }
-    .color-swatch { width: 45px; height: 25px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        /* DRESS CODE */
+        .palette-box { display: flex; justify-content: center; gap: 10px; margin: 15px 0 10px 0; }
+        .color-swatch { width: 45px; height: 25px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
 
-    /* TIMELINE */
-    .schedule-title { text-align: center; font-size: 18px; font-weight: bold; margin: 30px 0 20px 0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-    .timeline { position: relative; max-width: 450px; margin: 0 auto 30px auto; padding-left: 20px; }
-    .timeline::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: #333; }
-    .timeline-item { position: relative; margin-bottom: 20px; padding-left: 25px; }
-    .timeline-item::before { content: ''; position: absolute; left: -18px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: #1a1a1a; border: 2px solid #fbf8f1; }
-    .timeline-time { font-size: 18px; font-weight: bold; font-style: italic; color: #000; }
-    .timeline-event-title { font-size: 15px; font-weight: bold; color: #222; }
-    .timeline-desc { font-size: 13px; color: #555; font-style: italic; }
+        /* TIMELINE */
+        .schedule-title { text-align: center; font-size: 18px; font-weight: bold; margin: 30px 0 20px 0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .timeline { position: relative; max-width: 450px; margin: 0 auto 30px auto; padding-left: 20px; }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: #333; }
+        .timeline-item { position: relative; margin-bottom: 20px; padding-left: 25px; }
+        .timeline-item::before { content: ''; position: absolute; left: -18px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: #1a1a1a; border: 2px solid #fbf8f1; }
+        .timeline-time { font-size: 18px; font-weight: bold; font-style: italic; color: #000; }
+        .timeline-event-title { font-size: 15px; font-weight: bold; color: #222; }
+        .timeline-desc { font-size: 13px; color: #555; font-style: italic; }
 
-    /* FOOTER & SEAL */
-    .official-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; padding-top: 15px; border-top: 1px solid #1a1a1a; }
-    .signature-block { font-size: 13px; }
-    .stamp-container { position: relative; width: 130px; height: 130px; display: flex; align-items: center; justify-content: center; }
-    .official-stamp {
-      width: 120px; height: 120px; border: 3px double #a81c1c; border-radius: 50%; color: #a81c1c;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-      transform: rotate(-8deg); opacity: 0.85; padding: 8px; font-size: 9px; font-weight: bold;
-      box-shadow: inset 0 0 2px #a81c1c; background: radial-gradient(circle, rgba(168, 28, 28, 0.03) 0%, transparent 70%);
-    }
-    .stamp-inner-ring { border: 1px dashed #a81c1c; border-radius: 50%; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; }
-    .stamp-text-top { font-size: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
-    .stamp-text-center { font-size: 13px; font-weight: bold; margin: 4px 0; text-transform: uppercase; border-top: 1px solid #a81c1c; border-bottom: 1px solid #a81c1c; width: 90%; padding: 2px 0; }
-    .stamp-text-bottom { font-size: 8px; }
+        /* FOOTER & SEAL */
+        .official-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; padding-top: 15px; border-top: 1px solid #1a1a1a; }
+        .signature-block { font-size: 13px; }
+        .stamp-container { position: relative; width: 130px; height: 130px; display: flex; align-items: center; justify-content: center; }
+        .official-stamp {
+            width: 120px; height: 120px; border: 3px double #a81c1c; border-radius: 50%; color: #a81c1c;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            transform: rotate(-8deg); opacity: 0.85; padding: 8px; font-size: 9px; font-weight: bold;
+            box-shadow: inset 0 0 2px #a81c1c; background: radial-gradient(circle, rgba(168, 28, 28, 0.03) 0%, transparent 70%);
+        }
+        .stamp-inner-ring { border: 1px dashed #a81c1c; border-radius: 50%; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; }
+        .stamp-text-top { font-size: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .stamp-text-center { font-size: 13px; font-weight: bold; margin: 4px 0; text-transform: uppercase; border-top: 1px solid #a81c1c; border-bottom: 1px solid #a81c1c; width: 90%; padding: 2px 0; }
+        .stamp-text-bottom { font-size: 8px; }
 
-    .consequences-block { margin: 30px 0 20px 0; background-color: rgba(168, 28, 28, 0.04); border: 1px solid rgba(168, 28, 28, 0.2); padding: 15px; border-radius: 3px; }
-    .consequences-title { font-weight: bold; color: #8b0000; font-size: 14px; margin-bottom: 5px; text-transform: uppercase; }
+        .consequences-block { margin: 30px 0 20px 0; background-color: rgba(168, 28, 28, 0.04); border: 1px solid rgba(168, 28, 28, 0.2); padding: 15px; border-radius: 3px; }
+        .consequences-title { font-weight: bold; color: #8b0000; font-size: 14px; margin-bottom: 5px; text-transform: uppercase; }
 
-    /* RSVP FORM */
-    .rsvp-section { background: #2f3459; color: #ffffff; padding: 25px; border-radius: 6px; margin-top: 35px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .rsvp-title { text-align: center; font-size: 18px; margin-bottom: 20px; font-weight: bold; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
-    .rsvp-actions { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
-    .btn-confirm, .btn-decline { padding: 12px 20px; font-family: inherit; font-size: 14px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
-    .btn-confirm { background-color: #27ae60; color: #fff; }
-    .btn-confirm:hover { background-color: #219653; }
-    .btn-decline { background-color: #7f8c8d; color: #fff; }
-    .btn-decline:hover { background-color: #636e72; }
-    .btn-confirm.active { background-color: #1e8449; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
-    .btn-decline.active { background-color: #4a5458; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        /* RSVP FORM */
+        .rsvp-section { background: #2f3459; color: #ffffff; padding: 25px; border-radius: 6px; margin-top: 35px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .rsvp-title { text-align: center; font-size: 18px; margin-bottom: 20px; font-weight: bold; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .rsvp-actions { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
+        .btn-confirm, .btn-decline { padding: 12px 20px; font-family: inherit; font-size: 14px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
+        .btn-confirm { background-color: #27ae60; color: #fff; }
+        .btn-confirm:hover { background-color: #219653; }
+        .btn-decline { background-color: #7f8c8d; color: #fff; }
+        .btn-decline:hover { background-color: #636e72; }
+        .btn-confirm.active { background-color: #1e8449; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        .btn-decline.active { background-color: #4a5458; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
 
-    .form-group { margin-bottom: 18px; }
-    .form-label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
-    .form-input { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 14px; margin-bottom: 10px; }
-    .options-list { display: flex; flex-direction: column; gap: 8px; }
-    .option-item { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
-    .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a69bd; cursor: pointer; }
-    .rsvp-textarea { width: 100%; height: 80px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 13px; resize: vertical; background: #fdfdfd; color: #222; }
-    .submit-btn { width: 100%; padding: 12px; background-color: #4a69bd; color: white; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
-    .submit-btn:hover { background-color: #1e3799; }
-    .form-status-msg { display: none; margin-top: 15px; padding: 12px; background-color: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; border-radius: 4px; text-align: center; font-size: 14px; color: #2ecc71; }
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
+        .form-input { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 14px; margin-bottom: 10px; }
+        .options-list { display: flex; flex-direction: column; gap: 8px; }
+        .option-item { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
+        .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a69bd; cursor: pointer; }
+        .rsvp-textarea { width: 100%; height: 80px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 13px; resize: vertical; background: #fdfdfd; color: #222; }
+        .submit-btn { width: 100%; padding: 12px; background-color: #4a69bd; color: white; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        .submit-btn:hover { background-color: #1e3799; }
+        .form-status-msg { display: none; margin-top: 15px; padding: 12px; background-color: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; border-radius: 4px; text-align: center; font-size: 14px; color: #2ecc71; }
 
-    /* MAP SECTION */
-    .map-section { margin-top: 35px; }
-    .map-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; text-align: center; }
-    .map-frame-wrapper { width: 100%; height: 350px; border: 1px solid #bbb; border-radius: 4px; overflow: hidden; background-color: #e9e5dc; }
-    .map-frame-wrapper iframe { width: 100%; height: 100%; border: 0; }
-    .map-instruction { font-size: 12px; color: #555; margin-top: 8px; text-align: center; font-style: italic; }
-    .gis-link { display: inline-block; margin-top: 6px; color: #1b4f72; text-decoration: underline; font-weight: bold; }
+        /* MAP SECTION */
+        .map-section { margin-top: 35px; }
+        .map-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; text-align: center; }
+        .map-frame-wrapper { width: 100%; height: 350px; border: 1px solid #bbb; border-radius: 4px; overflow: hidden; background-color: #e9e5dc; }
+        .map-frame-wrapper iframe { width: 100%; height: 100%; border: 0; }
+        .map-instruction { font-size: 12px; color: #555; margin-top: 8px; text-align: center; font-style: italic; }
+        .gis-link { display: inline-block; margin-top: 6px; color: #1b4f72; text-decoration: underline; font-weight: bold; }
 
-    @media (max-width: 600px) {
-      .paper-document { padding: 20px 15px; }
-      .header-section { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
-      .emblem-wrapper { max-width: 100%; flex-direction: column; }
-      .barcode-box { text-align: center; }
-      .doc-title { font-size: 20px; }
-      .timer-grid { gap: 8px; }
-      .timer-block { min-width: 45px; }
-      .timer-value { font-size: 20px; }
-      .official-footer { flex-direction: column; gap: 20px; text-align: center; }
-      .rsvp-actions { flex-direction: column; }
-    }
-  </style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            width: 100%;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        .card-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Здесь будет ваше фото */
+        .card-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Заглушка для фото, если картинка не загружена */
+        .image-placeholder {
+            background-color: #eae5de;
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 18px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+
+        .card-content {
+            padding: 25px 30px 30px 30px;
+        }
+
+        .card-title {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #3a2c25;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+        }
+
+        .card-subtitle {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            color: #7a6b62;
+            margin: 0 0 15px 0;
+            font-style: italic;
+        }
+
+        .card-text {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2c2a28;
+            margin: 0;
+        }
+
+
+        @media (max-width: 600px) {
+            .paper-document { padding: 20px 15px; }
+            .header-section { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+            .emblem-wrapper { max-width: 100%; flex-direction: column; }
+            .barcode-box { text-align: center; }
+            .doc-title { font-size: 20px; }
+            .timer-grid { gap: 8px; }
+            .timer-block { min-width: 45px; }
+            .timer-value { font-size: 20px; }
+            .official-footer { flex-direction: column; gap: 20px; text-align: center; }
+            .rsvp-actions { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="paper-document">
+<div class="paper-document">
     <!-- HEADER -->
     <div class="header-section">
-      <div class="emblem-wrapper">
-        <svg class="coat-of-arms" viewBox="0 0 100 110" fill="#a81c1c">
-          <path d="M50,5 C52,5 75,12 85,25 C85,60 70,85 50,105 C30,85 15,60 15,25 C25,12 48,5 50,5 Z" fill="none" stroke="#8b0000" stroke-width="2"/>
-          <path d="M50,12 L54,22 L65,22 L56,28 L60,38 L50,32 L40,38 L44,28 L35,22 L46,22 Z" fill="#8b0000"/>
-          <text x="50" y="60" font-family="serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#8b0000">РФ</text>
-          <path d="M30,70 Q50,80 70,70" stroke="#8b0000" stroke-width="2" fill="none"/>
-        </svg>
-        <div>
-          <div class="header-title-text">ПРОКУРАТУРА РОССИЙСКОЙ ФЕДЕРАЦИИ</div>
-          <div class="header-subtitle">Пресс-служба и комитет по проведению семейных торжеств</div>
-          <div class="header-subtitle" style="font-size: 10px; color: #666;">Департамент свадебно-надзорных дел</div>
+        <div class="emblem-wrapper">
+            <svg class="coat-of-arms" viewBox="0 0 100 110" fill="#a81c1c">
+                <path d="M50,5 C52,5 75,12 85,25 C85,60 70,85 50,105 C30,85 15,60 15,25 C25,12 48,5 50,5 Z" fill="none" stroke="#8b0000" stroke-width="2"/>
+                <path d="M50,12 L54,22 L65,22 L56,28 L60,38 L50,32 L40,38 L44,28 L35,22 L46,22 Z" fill="#8b0000"/>
+                <text x="50" y="60" font-family="serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#8b0000">РФ</text>
+                <path d="M30,70 Q50,80 70,70" stroke="#8b0000" stroke-width="2" fill="none"/>
+            </svg>
+            <div>
+                <div class="header-title-text">ПРОКУРАТУРА РОССИЙСКОЙ ФЕДЕРАЦИИ</div>
+                <div class="header-subtitle">Пресс-служба и комитет по проведению семейных торжеств</div>
+                <div class="header-subtitle" style="font-size: 10px; color: #666;">Департамент свадебно-надзорных дел</div>
+            </div>
         </div>
-      </div>
-      <div class="barcode-box">
-        <svg class="barcode-svg" viewBox="0 0 130 40">
-          <rect x="0" y="0" width="3" height="35" fill="#000"/><rect x="5" y="0" width="1" height="35" fill="#000"/><rect x="8" y="0" width="4" height="35" fill="#000"/><rect x="15" y="0" width="2" height="35" fill="#000"/><rect x="20" y="0" width="1" height="35" fill="#000"/><rect x="23" y="0" width="5" height="35" fill="#000"/><rect x="31" y="0" width="2" height="35" fill="#000"/><rect x="35" y="0" width="3" height="35" fill="#000"/><rect x="41" y="0" width="1" height="35" fill="#000"/><rect x="44" y="0" width="4" height="35" fill="#000"/><rect x="51" y="0" width="2" height="35" fill="#000"/><rect x="55" y="0" width="6" height="35" fill="#000"/><rect x="64" y="0" width="1" height="35" fill="#000"/><rect x="67" y="0" width="3" height="35" fill="#000"/><rect x="73" y="0" width="2" height="35" fill="#000"/><rect x="78" y="0" width="4" height="35" fill="#000"/><rect x="85" y="0" width="1" height="35" fill="#000"/><rect x="88" y="0" width="5" height="35" fill="#000"/><rect x="96" y="0" width="2" height="35" fill="#000"/><rect x="100" y="0" width="3" height="35" fill="#000"/><rect x="106" y="0" width="1" height="35" fill="#000"/><rect x="110" y="0" width="4" height="35" fill="#000"/><rect x="117" y="0" width="2" height="35" fill="#000"/><rect x="122" y="0" width="3" height="35" fill="#000"/><rect x="127" y="0" width="2" height="35" fill="#000"/>
-        </svg>
-        <div class="barcode-num">09092026</div>
-      </div>
+        <div class="barcode-box">
+            <svg class="barcode-svg" viewBox="0 0 130 40">
+                <rect x="0" y="0" width="3" height="35" fill="#000"/><rect x="5" y="0" width="1" height="35" fill="#000"/><rect x="8" y="0" width="4" height="35" fill="#000"/><rect x="15" y="0" width="2" height="35" fill="#000"/><rect x="20" y="0" width="1" height="35" fill="#000"/><rect x="23" y="0" width="5" height="35" fill="#000"/><rect x="31" y="0" width="2" height="35" fill="#000"/><rect x="35" y="0" width="3" height="35" fill="#000"/><rect x="41" y="0" width="1" height="35" fill="#000"/><rect x="44" y="0" width="4" height="35" fill="#000"/><rect x="51" y="0" width="2" height="35" fill="#000"/><rect x="55" y="0" width="6" height="35" fill="#000"/><rect x="64" y="0" width="1" height="35" fill="#000"/><rect x="67" y="0" width="3" height="35" fill="#000"/><rect x="73" y="0" width="2" height="35" fill="#000"/><rect x="78" y="0" width="4" height="35" fill="#000"/><rect x="85" y="0" width="1" height="35" fill="#000"/><rect x="88" y="0" width="5" height="35" fill="#000"/><rect x="96" y="0" width="2" height="35" fill="#000"/><rect x="100" y="0" width="3" height="35" fill="#000"/><rect x="106" y="0" width="1" height="35" fill="#000"/><rect x="110" y="0" width="4" height="35" fill="#000"/><rect x="117" y="0" width="2" height="35" fill="#000"/><rect x="122" y="0" width="3" height="35" fill="#000"/><rect x="127" y="0" width="2" height="35" fill="#000"/>
+            </svg>
+            <div class="barcode-num">09092026</div>
+        </div>
     </div>
 
     <!-- MAIN CONTENT -->
     <div class="doc-title">ИЗВЕЩЕНИЕ</div>
     <p class="legal-text">
-      Семья Петри сообщает о том, что свадебное мероприятие по делу заключения брачного союза <span class="case-number">№ 22-07/26</span> в отношении влюбленных <strong>Петри Виктора Александровича</strong> и <strong>Щукиной Анны Анатольевны</strong> назначено к проведению на <strong>09 сентября 2026 г.</strong>
+        Семья Петри сообщает о том, что свадебное мероприятие по делу заключения брачного союза <span class="case-number">№ 22-07/26</span> в отношении влюбленных <strong>Петри Виктора Александровича</strong> и <strong>Щукиной Анны Анатольевны</strong> назначено к проведению на <strong>09 сентября 2026 г.</strong>
     </p>
 
     <!-- TIMER -->
     <div class="timer-container">
-      <div class="timer-title">До начала официального мероприятия осталось:</div>
-      <div class="timer-grid">
-        <div class="timer-block"><span class="timer-value" id="weeks">00</span><span class="timer-label">недель</span></div>
-        <div class="timer-block"><span class="timer-value" id="days">00</span><span class="timer-label">дней</span></div>
-        <div class="timer-block"><span class="timer-value" id="hours">00</span><span class="timer-label">часов</span></div>
-        <div class="timer-block"><span class="timer-value" id="minutes">00</span><span class="timer-label">минут</span></div>
-        <div class="timer-block"><span class="timer-value" id="seconds">00</span><span class="timer-label">секунд</span></div>
-      </div>
+        <div class="timer-title">До начала официального мероприятия осталось:</div>
+        <div class="timer-grid">
+            <div class="timer-block"><span class="timer-value" id="weeks">00</span><span class="timer-label">недель</span></div>
+            <div class="timer-block"><span class="timer-value" id="days">00</span><span class="timer-label">дней</span></div>
+            <div class="timer-block"><span class="timer-value" id="hours">00</span><span class="timer-label">часов</span></div>
+            <div class="timer-block"><span class="timer-value" id="minutes">00</span><span class="timer-label">минут</span></div>
+            <div class="timer-block"><span class="timer-value" id="seconds">00</span><span class="timer-label">секунд</span></div>
+        </div>
     </div>
 
     <div class="doc-subtitle">ОФИЦИАЛЬНАЯ ПОВЕСТКА</div>
+    <div style="text-align: center;">
+        <strong>Дорогой Гость!</strong><br>
+    </div>
     <p class="legal-text">
-      <strong>Дорогой Гость!</strong><br>
-      Семья Петри вызывает Вас в качестве почётного гостя к <strong>17 часам 30 минутам 09.09.2026 г.</strong> по адресу: <br>
-      <em>г. Новосибирск, ул. Янтарная, д. 61 (комплекс «Лесные дачи»)</em>.
+        Семья Петри вызывает Вас в качестве почётного гостя к <strong>17 часам 30 минутам 09.09.2026 г.</strong> по адресу: <br>
+        <em>г. Новосибирск, ул. Янтарная, д. 61 (комплекс «Лесные дачи»)</em>.
     </p>
 
     <div class="highlight-box">
-      <strong>ПРИЛОЖЕНИЕ К ПОВЕСТКЕ:</strong>
-      <p style="margin-top: 6px; text-indent: 0;">
-        1. В соответствии с регламентом торжества определен дресс-код: <strong>пастельные тона</strong>.
-      </p>
-      <div class="palette-box">
-        <div class="color-swatch" style="background-color: #fef08a;" title="Пастельный жёлтый"></div>
-        <div class="color-swatch" style="background-color: #e9d5ff;" title="Лавандовый"></div>
-        <div class="color-swatch" style="background-color: #fed7aa;" title="Персиковый"></div>
-        <div class="color-swatch" style="background-color: #bbf7d0;" title="Мятный"></div>
-        <div class="color-swatch" style="background-color: #bae6fd;" title="Нежно-голубой"></div>
-      </div>
-      <p style="text-indent: 0; font-style: italic;">
-        2. Разрешается плакать от счастья, участвовать в конкурсах, танцевать и кричать «Горько!».
-      </p>
+        <strong>ПРИЛОЖЕНИЕ К ПОВЕСТКЕ:</strong>
+        <p style="margin-top: 6px; text-indent: 0;">
+            1. Место на карте: : <strong>https://go.2gis.com/FpYmq</strong>.
+        </p>
+
+
+        <p style="text-indent: 0; font-style: italic;">
+            2. Разрешается плакать от счастья, участвовать в конкурсах, танцевать и кричать «Горько!».
+        </p>
+    </div>
+    <div class="schedule-block">
+        <div class="schedule-title">Расписание мероприятия:</div>
+        <div class="schedule-grid">
+            <div>1. 17:30 — Сбор гостей;</div>
+            <div>2. 18:30 — Торжественная церемония;</div>
+            <div>3. 19:00 — Банкет;</div>
+            <div>4. 00:00 — Завершение.</div>
+        </div>
     </div>
 
     <!-- TIMELINE -->
-    <div class="schedule-title">РАСПИСАНИЕ МЕРОПРИЯТИЯ</div>
-    <div class="timeline">
-      <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-event-title">Сбор гостей</div><div class="timeline-desc">Приветственный напиток и фотосессия</div></div>
-      <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-event-title">Торжественная регистрация</div><div class="timeline-desc">Официальное скрепление брачного союза</div></div>
-      <div class="timeline-item"><div class="timeline-time">19:00</div><div class="timeline-event-title">Праздничный банкет</div><div class="timeline-desc">Поздравления, угощения, конкурсы и танцы</div></div>
-      <div class="timeline-item"><div class="timeline-time">00:00</div><div class="timeline-event-title">Завершение вечера</div><div class="timeline-desc">Финал программы</div></div>
-    </div>
+
 
     <div class="consequences-block">
-      <div class="consequences-title">Последствия неявки:</div>
-      <p style="font-size: 13px; margin: 0;">Материалы дела будут переданы в семейно-дружеский надзорный орган для проведения проверки!</p>
+        <div class="consequences-title">Последствия неявки:</div>
+        <p style="font-size: 13px; margin: 0;">Материалы дела будут переданы в семейно-дружеский надзорный орган для проведения проверки!</p>
     </div>
+    <div style="top:0%" type="img" class="moveBox"><div style="margin-left: 25%; margin-right: 25%; animation: 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal both running appearFromBottom;" class="textLine" action="text26" data-myinv-reveal-done="1"><img class="BGPlace" width="100%" style="border-radius: 0px; background: rgba(255, 255, 255, 0.8); padding: 2%;" src="https://weddingpost.site/images/797060/473ad1_20250905151533.png" data-frame-rounding-pct="0" fetchpriority="high" decoding="async"></div></div>
 
     <div class="official-footer">
-      <div class="signature-block">
-        <div>Ответственные лица:</div>
-        <div style="font-weight: bold; margin-top: 4px;">Виктор Петри & Анна Щукина</div>
-        <div style="font-size: 11px; color: #555; margin-top: 2px;">Дата выдачи: 09.09.2026</div>
-      </div>
-      <div class="stamp-container">
-        <div class="official-stamp">
-          <div class="stamp-inner-ring">
-            <span class="stamp-text-top">ПРОКУРАТУРА РФ</span>
-            <span class="stamp-text-center">ЖДЕМ ВАС</span>
-            <span class="stamp-text-bottom">СВАДЕБНЫЙ ОТДЕЛ</span>
-          </div>
+        <div class="signature-block">
+            <div>Ответственные лица:</div>
+            <div style="font-weight: bold; margin-top: 4px;">Виктор Петри & Анна Щукина</div>
+            <div style="font-size: 11px; color: #555; margin-top: 2px;">Дата выдачи: 09.09.2026</div>
         </div>
-      </div>
+        <div class="stamp-container">
+            <div class="official-stamp">
+                <div class="stamp-inner-ring">
+                    <span class="stamp-text-top">ПРОКУРАТУРА РФ</span>
+                    <span class="stamp-text-center">ЖДЕМ ВАС</span>
+                    <span class="stamp-text-bottom">СВАДЕБНЫЙ ОТДЕЛ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="official-footer">
+        <div class="signature-block">
+            Будем благодарны, если при выборе нарядов на наше торжество вы придержитесь следующей палитры:
+        </div>
+        <div class="dresscode-image">
+            <div class="palette-box">
+                <div class="color-swatch" style="background-color: #fef08a;" title="Пастельный жёлтый"></div>
+                <div class="color-swatch" style="background-color: #e9d5ff;" title="Лавандовый"></div>
+                <div class="color-swatch" style="background-color: #fed7aa;" title="Персиковый"></div>
+                <div class="color-swatch" style="background-color: #bbf7d0;" title="Мятный"></div>
+                <div class="color-swatch" style="background-color: #bae6fd;" title="Нежно-голубой"></div>
+            </div>
+        </div>
     </div>
 
     <!-- RSVP FORM -->
     <div class="rsvp-section">
-      <div class="rsvp-title">ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ</div>
-      
-      <div class="rsvp-actions">
-        <button type="button" class="btn-confirm active" id="btnConfirm" onclick="setAttendance('yes')">✓ Подтверждаю присутствие</button>
-        <button type="button" class="btn-decline" id="btnDecline" onclick="setAttendance('no')">✕ Не смогу присутствовать</button>
-      </div>
+        <div class="rsvp-title">ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ</div>
 
-      <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
-        <input type="hidden" id="attendanceInput" name="attendance" value="yes">
-
-        <div class="form-group">
-          <label class="form-label">Ваше Имя и Фамилия:</label>
-          <input type="text" name="guest_name" class="form-input" placeholder="Иван Иванов" required>
+        <div class="rsvp-actions">
+            <button type="button" class="btn-confirm active" id="btnConfirm" onclick="setAttendance('yes')">✓ Подтверждаю присутствие</button>
+            <button type="button" class="btn-decline" id="btnDecline" onclick="setAttendance('no')">✕ Не смогу присутствовать</button>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Потребуется ли вам трансфер?</label>
-          <div class="options-list">
-            <label class="option-item"><input type="radio" name="transfer" value="Нет" checked> Нет</label>
-            <label class="option-item"><input type="radio" name="transfer" value="Только до торжества"> Только до торжества</label>
-            <label class="option-item"><input type="radio" name="transfer" value="Только после торжества"> Только после торжества</label>
-            <label class="option-item"><input type="radio" name="transfer" value="До и после"> До и после торжества</label>
-          </div>
-        </div>
+        <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
+            <input type="hidden" id="attendanceInput" name="attendance" value="yes">
 
-        <div class="form-group">
-          <label class="form-label">Предпочтения по меню:</label>
-          <div class="options-list">
-            <label class="option-item"><input type="radio" name="food" value="Без ограничений" checked> Нет особых ограничений</label>
-            <label class="option-item"><input type="radio" name="food" value="Не ем мясо"> Не ем мясо</label>
-            <label class="option-item"><input type="radio" name="food" value="Не ем рыбу"> Не ем рыбу</label>
-            <label class="option-item"><input type="radio" name="food" value="Вегетарианство"> Вегетарианство</label>
-          </div>
-        </div>
+            <div class="form-group">
+                <label class="form-label">Ваше Имя и Фамилия:</label>
+                <input type="text" name="guest_name" class="form-input" placeholder="Иван Иванов" required>
+            </div>
 
-        <div class="form-group">
-          <label class="form-label">Предпочитаемый алкоголь:</label>
-          <div class="options-list">
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Красное вино"> Красное вино</label>
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Белое вино"> Белое вино</label>
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Шампанское"> Шампанское</label>
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Виски/Коньяк"> Виски / Коньяк</label>
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Водка"> Водка</label>
-            <label class="option-item"><input type="checkbox" name="alcohol" value="Без алкоголя"> Без алкоголя</label>
-          </div>
-        </div>
+            <div class="form-group">
+                <label class="form-label">Потребуется ли вам трансфер?</label>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="transfer" value="Нет" checked> Нет</label>
+                    <label class="option-item"><input type="radio" name="transfer" value="Только до торжества"> Только до торжества</label>
+                    <label class="option-item"><input type="radio" name="transfer" value="Только после торжества"> Только после торжества</label>
+                    <label class="option-item"><input type="radio" name="transfer" value="До и после"> До и после торжества</label>
+                </div>
+            </div>
 
-        <div class="form-group">
-          <label class="form-label">Будет ли с вами ребенок?</label>
-          <div class="options-list">
-            <label class="option-item"><input type="radio" name="child" value="Нет" checked> Нет</label>
-            <label class="option-item"><input type="radio" name="child" value="Да"> Да</label>
-          </div>
-        </div>
+            <div class="form-group">
+                <label class="form-label">Предпочтения по меню:</label>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="food" value="Без ограничений" checked> Нет особых ограничений</label>
+                    <label class="option-item"><input type="radio" name="food" value="Не ем мясо"> Не ем мясо</label>
+                    <label class="option-item"><input type="radio" name="food" value="Не ем рыбу"> Не ем рыбу</label>
+                    <label class="option-item"><input type="radio" name="food" value="Вегетарианство"> Вегетарианство</label>
+                </div>
+            </div>
 
-        <div class="form-group">
-          <label class="form-label">Сообщение / Пожелания:</label>
-          <textarea class="rsvp-textarea" name="message" placeholder="Введите ваш текст или особые комментарии..."></textarea>
-        </div>
+            <div class="form-group">
+                <label class="form-label">Предпочитаемый алкоголь:</label>
+                <div class="options-list">
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Красное вино"> Красное вино</label>
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Белое вино"> Белое вино</label>
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Шампанское"> Шампанское</label>
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Виски/Коньяк"> Виски / Коньяк</label>
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Водка"> Водка</label>
+                    <label class="option-item"><input type="checkbox" name="alcohol" value="Без алкоголя"> Без алкоголя</label>
+                </div>
+            </div>
 
-        <button type="submit" class="submit-btn" id="submitBtn">✈ Отправить ответ</button>
-        <div class="form-status-msg" id="statusMsg">Спасибо! Ваш ответ успешно зафиксирован в материалах дела.</div>
-      </form>
+            <div class="form-group">
+                <label class="form-label">Будет ли с вами ребенок?</label>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="child" value="Нет" checked> Нет</label>
+                    <label class="option-item"><input type="radio" name="child" value="Да"> Да</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Сообщение / Пожелания:</label>
+                <textarea class="rsvp-textarea" name="message" placeholder="Введите ваш текст или особые комментарии..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">✈ Отправить ответ</button>
+            <div class="form-status-msg" id="statusMsg">Спасибо! Ваш ответ успешно зафиксирован в материалах дела.</div>
+        </form>
     </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР ТАЙМЛАЙНА -->
+    <section class="timeline-container" id="wedding-timeline">
+
+        <!-- ВЕКТОРНЫЙ СЛОЙ (ЛИНИЯ И СЕРДЕЧКО) -->
+        <svg class="timeline-svg" viewBox="0 0 500 1200" preserveAspectRatio="none">
+            <!-- Амплитуда изгиба уменьшена (295 / 205 вместо 360 / 140) -->
+            <path id="timeline-path"
+                  d="M 250 60
+             C 295 195, 295 195, 250 330
+             C 205 465, 205 465, 250 600
+             C 295 735, 295 735, 250 870
+             C 205 1005, 205 1005, 250 1140"
+                  fill="none" stroke="#777" stroke-width="2"/>
+
+            <!-- Контрольные точки -->
+            <circle cx="250" cy="60" r="5" fill="#222"/>
+            <circle cx="250" cy="330" r="5" fill="#222"/>
+            <circle cx="250" cy="600" r="5" fill="#222"/>
+            <circle cx="250" cy="870" r="5" fill="#222"/>
+            <circle cx="250" cy="1140" r="5" fill="#222"/>
+
+            <!-- Сердечко -->
+            <g id="timeline-heart">
+                <path d="M 0 -5 C -4 -13, -13 -8, -13 0 C -13 9, 0 16, 0 20 C 0 16, 13 9, 13 0 C 13 -8, 4 -13, 0 -5 Z" fill="#1b1b3a"/>
+            </g>
+        </svg>
+
+        <!-- КОНТЕНТНЫЙ СЛОЙ -->
+        <div class="timeline-content">
+
+            <!-- Блок 1 (16:20) -->
+            <div class="timeline-row">
+                <div class="col col-left text-col">
+                    <div class="time">16:20</div>
+                    <div class="title">Торжественная регистрация</div>
+                    <p class="desc">Наша регистрация пройдет в залах ЗАГСА, приглашаем всех разделить с нами такой торжественный момент</p>
+                </div>
+                <div class="col col-right icon-col">
+                    <img src="https://media.istockphoto.com/id/1223334891/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D0%B0%D0%BB%D0%BC%D0%B0%D0%B7%D0%B0-%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0-%D0%B1%D1%80%D0%B8%D0%BB%D0%BB%D0%B8%D0%B0%D0%BD%D1%82%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BB%D1%8C%D1%86%D0%B0.jpg?s=612x612&w=0&k=20&c=R-XjmrQV-OTuNb1wFicwuEznC3dmpJb40Epsyst_Ld4=" alt="Фото">
+                </div>
+            </div>
+
+            <!-- Блок 2 (18:00) -->
+            <div class="timeline-row">
+                <div class="col col-left icon-col">
+                    <img src="https://img.magnific.com/premium-vector/two-glasses-champagne-icon-doodle-hand-drawn-outline-line-drawing-clipart-symbol_399998-9701.jpg" alt="Фото">
+                </div>
+                <div class="col col-right text-col">
+                    <div class="time">18:00</div>
+                    <div class="title">Фуршет</div>
+                    <p class="desc">Время пролетает незаметно за фуршетом и общением с другими гостями</p>
+                </div>
+            </div>
+
+            <!-- Блок 3 (18:30) -->
+            <div class="timeline-row">
+                <div class="col col-left text-col">
+                    <div class="time">18:30</div>
+                    <div class="title">Выездная регистрация</div>
+                    <p class="desc">До банкета у вас будет время, чтобы узнать друг друга поближе и пофотографироваться</p>
+                </div>
+                <div class="col col-right icon-col">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_wv5I0Lt7x8jtL4kyb8vjyxWUtgxHR-x0IQjUn_z-ivMcNT1f" alt="Фото">
+                </div>
+            </div>
+
+            <!-- Блок 4 (19:00) -->
+            <div class="timeline-row">
+                <div class="col col-left icon-col">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI_XYlfuSbxJ5113tTCtFRnGoRbx1klNnQ7bMahLHiwGrypdPb" alt="Фото">
+                </div>
+                <div class="col col-right text-col">
+                    <div class="time">19:00</div>
+                    <div class="title">Праздничный банкет</div>
+                    <p class="desc">Здесь пройдет наш праздничный банкет</p>
+                </div>
+            </div>
+
+            <!-- Блок 5 (00:00) -->
+            <div class="timeline-row">
+                <div class="col col-left text-col">
+                    <div class="time">00:00</div>
+                    <div class="title">Окончание праздничного дня</div>
+                    <p class="desc">Даже такой день может когда-то подойти к концу</p>
+                </div>
+                <div class="col col-right icon-col">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu81V-7WPysWik4sbuH2pkWNuiMwg-vkYOrqyOHLKuEzjIJbD0" alt="Фото">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CSS СТИЛИ -->
+    <style>
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            max-width: 750px; /* Ширина контейнера слегка увеличена */
+            margin: 0 auto;
+            padding: 60px 0;
+            box-sizing: border-box;
+        }
+
+        .timeline-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+        }
+
+        .timeline-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .col {
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Увеличенные отступы (85px) дают гарантированный клиренс от дуги */
+        .col-left {
+            text-align: right;
+            padding-right: 85px;
+        }
+
+        .col-right {
+            text-align: left;
+            padding-left: 85px;
+        }
+
+        .icon-col {
+            display: flex;
+            align-items: center;
+        }
+
+        .col-left.icon-col {
+            justify-content: flex-end;
+        }
+
+        .col-right.icon-col {
+            justify-content: flex-start;
+        }
+
+        /* Картинки увеличены до 140px */
+        .icon-col img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .time {
+            font-size: 2.2rem;
+            font-style: italic;
+            line-height: 1.1;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-style: italic;
+            margin: 6px 0;
+        }
+
+        .desc {
+            font-size: 0.85rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) {
+            .col-left { padding-right: 45px; }
+            .col-right { padding-left: 45px; }
+            .icon-col img { width: 95px; height: 95px; }
+            .time { font-size: 1.7rem; }
+            .title { font-size: 0.95rem; }
+            .desc { font-size: 0.75rem; }
+        }
+    </style>
+
+    <!-- СКРИПТ АНИМАЦИИ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('wedding-timeline');
+            const path = document.getElementById('timeline-path');
+            const heart = document.getElementById('timeline-heart');
+
+            if (!section || !path || !heart) return;
+
+            const pathLength = path.getTotalLength();
+
+            function updateHeart() {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                const totalHeight = rect.height;
+                const currentScroll = (windowHeight / 2) - rect.top;
+
+                let progress = currentScroll / totalHeight;
+                progress = Math.max(0, Math.min(1, progress));
+
+                const point = path.getPointAtLength(progress * pathLength);
+                heart.setAttribute('transform', `translate(${point.x}, ${point.y})`);
+            }
+
+            window.addEventListener('scroll', updateHeart, { passive: true });
+            window.addEventListener('resize', updateHeart);
+            updateHeart();
+        });
+    </script>
+
 
     <!-- MAP SECTION -->
     <div class="map-section">
-      <div class="map-title">МЕСТО ПРОВЕДЕНИЯ НА ЯНДЕКС.КАРТАХ</div>
-      <div class="map-frame-wrapper">
-        <iframe src="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm" width="100%" height="350" frameborder="0" allowfullscreen="true"></iframe>
-      </div>
-      <div class="map-instruction">
-        📍 Адрес: г. Новосибирск, ул. Янтарная, д. 61 («Лесные дачи»).<br>
-        <a href="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm">Открыть в Яндекс.Навигаторе</a>
-      </div>
+        <div class="map-title">МЕСТО ПРОВЕДЕНИЯ НА ЯНДЕКС.КАРТАХ</div>
+        <div class="map-frame-wrapper">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm"
+                    width="100%" height="350" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="map-instruction">
+            📍 Адрес: г. Новосибирск, ул. Янтарная, д. 61 («Лесные дачи»).<br>
+            <a href="https://yandex.ru/map-widget/v1/?ll=82.927655%2C55.178143&z=17&pt=82.927655%2C55.178143%2Cpm2rdm">Открыть
+                в Яндекс.Навигаторе</a>
+        </div>
     </div>
-  </div>
+</div>
 
-  <script>
+<script>
     // TIMER LOGIC
     const targetDate = new Date('2026-09-09T17:30:00').getTime();
     function updateCountdown() {
-      const remaining = targetDate - Date.now();
-      if (remaining <= 0) return;
+        const remaining = targetDate - Date.now();
+        if (remaining <= 0) return;
 
-      const seconds = Math.floor((remaining / 1000) % 60);
-      const minutes = Math.floor((remaining / 1000 / 60) % 60);
-      const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
-      const totalDays = Math.floor(remaining / (1000 * 60 * 60 * 24));
-      
-      document.getElementById('weeks').innerText = String(Math.floor(totalDays / 7)).padStart(2, '0');
-      document.getElementById('days').innerText = String(totalDays % 7).padStart(2, '0');
-      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        const seconds = Math.floor((remaining / 1000) % 60);
+        const minutes = Math.floor((remaining / 1000 / 60) % 60);
+        const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+        const totalDays = Math.floor(remaining / (1000 * 60 * 60 * 24));
+
+        document.getElementById('weeks').innerText = String(Math.floor(totalDays / 7)).padStart(2, '0');
+        document.getElementById('days').innerText = String(totalDays % 7).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
     // RSVP ATTENDANCE TOGGLE
     function setAttendance(status) {
-      document.getElementById('attendanceInput').value = status;
-      document.getElementById('btnConfirm').classList.toggle('active', status === 'yes');
-      document.getElementById('btnDecline').classList.toggle('active', status === 'no');
+        document.getElementById('attendanceInput').value = status;
+        document.getElementById('btnConfirm').classList.toggle('active', status === 'yes');
+        document.getElementById('btnDecline').classList.toggle('active', status === 'no');
     }
 
     // HTTP FETCH HANDLER
@@ -404,7 +728,7 @@
             submitBtn.innerText = '✈ Отправить ответ';
         }
     }
-  </script>
+</script>
 </body>
 </html>
 
