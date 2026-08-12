@@ -358,60 +358,51 @@
 
     // HTTP FETCH HANDLER
     async function handleRsvpSubmit(event) {
-      event.preventDefault();
-      const submitBtn = document.getElementById('submitBtn');
-      const statusMsg = document.getElementById('statusMsg');
-      const form = event.target;
-      const formData = new FormData(form);
+        event.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        const form = event.target;
+        const formData = new FormData(form);
 
-      // Конфигурация отправки в Telegram
-      const TELEGRAM_BOT_TOKEN = '8819908038:AAEo9eIbARgO12Uf9fIkKkTw-IYvLdahmV0';
-      const TELEGRAM_CHAT_ID = '1102426488';
+        // Вставьте сюда URL вашего развернутого Google Web App
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ВАШ_SCRIPT_ID/exec';
 
-      const alcoholList = formData.getAll('alcohol').join(', ') || 'Не выбрано';
-      const text = `📌 *Новый ответ на приглашение!*\n\n` +
-                   `👤 *Гость:* ${formData.get('guest_name')}\n` +
-                   ` Статус: ${formData.get('attendance') === 'yes' ? '✅ Придет' : '❌ Не сможет'}\n` +
-                   `🚌 Трансфер: ${formData.get('transfer')}\n` +
-                   `🥗 Меню: ${formData.get('food')}\n` +
-                   `🍷 Алкоголь: ${alcoholList}\n` +
-                   `👶 Ребенок: ${formData.get('child')}\n` +
-                   `💬 Пожелания: ${formData.get('message') || '—'}`;
+        const payload = {
+            guest_name: formData.get('guest_name'),
+            attendance: formData.get('attendance'),
+            transfer: formData.get('transfer'),
+            food: formData.get('food'),
+            alcohol: formData.getAll('alcohol').join(', ') || 'Не выбрано',
+            child: formData.get('child'),
+            message: formData.get('message') || '—'
+        };
 
-      submitBtn.disabled = true;
-      submitBtn.innerText = 'Отправка...';
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Отправка...';
 
-      try {
-        /*
-          Для отправки в Telegram раскомментируйте код ниже и укажите данные бота.
-          Если будете отправлять на свой PHP/Laravel backend, замените URL на '/api/rsvp'.
-        */
+        try {
+            // Используем mode: 'no-cors' для корректной отправки payload на домен Google
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: text,
-            parse_mode: 'Markdown'
-          })
-        });
+            submitBtn.style.display = 'none';
+            statusMsg.style.display = 'block';
 
-        if (!response.ok) throw new Error('Ошибка HTTP');
-
-        submitBtn.style.display = 'none';
-        statusMsg.style.display = 'block';
-        if (formData.get('attendance') === 'no') {
-          statusMsg.innerText = 'Ответ принят. Жаль, что вы не сможете присутствовать.';
-          statusMsg.style.borderColor = '#e74c3c';
-          statusMsg.style.color = '#e74c3c';
+            if (formData.get('attendance') === 'no') {
+                statusMsg.innerText = 'Ответ принят. Жаль, что вы не сможете присутствовать.';
+                statusMsg.style.borderColor = '#e74c3c';
+                statusMsg.style.color = '#e74c3c';
+            }
+        } catch (error) {
+            console.error('Ошибка записи в Google Sheets:', error);
+            alert('Произошла ошибка при отправке ответа. Попробуйте еще раз.');
+            submitBtn.disabled = false;
+            submitBtn.innerText = '✈ Отправить ответ';
         }
-      } catch (error) {
-        // Заглушка для локальной проверки без рабочего токена
-        console.warn('Запрос заблокирован или не настроен токен. Показываем результат.');
-        submitBtn.style.display = 'none';
-        statusMsg.style.display = 'block';
-      }
     }
   </script>
 </body>
